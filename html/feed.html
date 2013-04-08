@@ -1,0 +1,52 @@
+{% extends "html/include/base.html" %}
+
+{% block pageTitle %}
+	Your Profile
+{% endblock pageTitle %}
+
+{% block content %}
+<section class="updateStatus">
+	<form method="POST" action="/feed">
+		<select name="statusPrefix">
+			<option value="I am working on">I am working on</option>
+			<option value="I am interested in">I am interested in</option>
+			<option value="I need help with">I need help with</option>
+			<option value="I am looking for a job @">I am looking for a job @</option>
+		</select>
+		<input type="text" placeholder="Status update" id="statusBar" name="statusUpdate"/>
+		<input type="submit" value="Update Status"/>
+	</form>
+</section>
+
+<section class="statusFeed">
+	{% for update in statusUpdates%}
+		<div class="feedItem">
+			<span class="profilePic">
+				<img src="">
+			</span>
+			<span class="updateInfo">
+				<em>{{update.user.nickname()}}</em> {{update.prefix}} {{update.update}}
+			</span> 
+			<span class="helpActions">
+				<a href="#" class="help">Help</a>
+				<a href="#" class="comment">Comment</a>
+			</span>
+		</div>
+	{% endfor %}
+	<!-- Prototype feed-item
+	<div class="feedItem">
+		<span class="profilePic">
+			<img src="">
+		</span>
+		<span class="updateInfo">
+			<em>Hadi Laasi</em> is working on his resume
+		</span> 
+		<span class="helpActions">
+			<a href="#">Help</a>
+			<a href="#">Comment</a>
+		</span>
+	</div>
+	-->
+</section>
+
+{% endblock content %}

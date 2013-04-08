@@ -1,0 +1,26 @@
+<!doctype html>
+  <head>
+    <title>{% block pageTitle %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    {% block head %}
+    {% endblock head %}
+  </head>
+  <body>
+	  <div class="content">
+	  	
+	  <img class="logo" src="https://production-startupschool.s3.amazonaws.com/images/si_logo_380.png" alt="Startup Institute Logo">   
+        {% block content %}{% endblock %}
+
+	  	
+
+	   </div>
+
+	   <section class="footer">
+	   	{% block footer %}{% endblock %}
+	   </section>
+
+  </body>
+
+</html>
