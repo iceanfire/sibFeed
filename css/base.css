@@ -81,11 +81,12 @@ body{
   position: relative;
   top: -20px;
   left: -20px;
+  display: none;
 }
 .statusFeed .feedItem{
   background-color: #F8F8F8;
   padding: 20px 0 20px 20px;
-  margin: 0 0 10px 0;
+  margin: 0 0 0 0;
   border: 1px solid #CFCFCF;
 
 }
@@ -113,5 +114,17 @@ body{
   display:none;
 }
 
+.help2{
+  display:none;
+}
 
+.helpInput{
+  background-color: red;
+  padding: 10px;
+  margin: 0 0 10px 0;
+}
+
+.helpInputHidden{
+  display: none;
+}
 

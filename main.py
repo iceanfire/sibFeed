@@ -83,6 +83,28 @@ class Feed(authHandler):
             self.redirect('/feed')
 
 
+class Help(authHandler):
+    def get(self,statusId):
+
+        searchHelp = answerListing().all().filter('status =',db.Key(statusId)).fetch(limit=100)
+        print searchHelp
+        for search in searchHelp:
+            print search
+            #print "<div class='answerWrapper'><span class='user'>"+searchHelp.user.nickname()+"</span><span class='answer'>"+searchHelp.answer+"</span></div>"
+        
+
+    def post(self):
+        helpAnswer = self.request.get('help')
+        helpId = int(self.request.get('statusId'))
+        newHelp = answerListing()
+        newHelp.user = users.get_current_user()
+        newHelp.answer = helpAnswer
+        
+        newHelp.status = statusUpdates.get_by_id(helpId)
+        newHelp.put()
+
+        self.redirect('/feed')
+
 class Admin(authHandler):
     def get(self):
         pass
@@ -90,7 +112,9 @@ class Admin(authHandler):
 application = webapp2.WSGIApplication([('/push', push),
                                       ('/', HomePage),
                                       ('/feed', Feed),
-                                      ('/admin', Admin)],
+                                      ('/admin', Admin),
+                                      ('/help',Help),
+                                      ('/help/(.*)',Help)],
                                      debug=True)
 
 def main():

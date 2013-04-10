@@ -27,11 +27,26 @@
 			<span class="updateInfo">
 				<em>{{update.user.nickname()}}</em> {{update.prefix}} {{update.update}}
 			</span> 
-			<span class="helpActions">
+			<span class="helpActions" id="{{update.key().id()}}">
 				<a href="#" class="help">Help</a>
-				<a href="#" class="comment">Comment</a>
 			</span>
+			
 		</div>
+
+		<div class="help2 {{update.key().id()}}">
+			<div class="helpInput">
+				<form method="POST" action="/help">
+					<input type="hidden" value="{{update.key().id()}}" name="statusId" id='statusId' />
+					<input type="hidden" value="{{update.key()}}" name="statusKey" id="statusKey" />
+					<input type="text" placeholder="Suggest how you can help" name="help" id="help" />
+					<input type="submit" value="Help Friend" />
+				</form>
+			</div>
+			<div class="helpOutput">
+				
+			</div>
+		</div>
+
 	{% endfor %}
 	<!-- Prototype feed-item
 	<div class="feedItem">
@@ -48,5 +63,9 @@
 	</div>
 	-->
 </section>
+
+<script type="text/javascript">
+$('.help').click(function(){ (className="."+$(this).parent().attr('id')); $(className).toggle() })
+</script>
 
 {% endblock content %}

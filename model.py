@@ -12,3 +12,10 @@ class statusUpdates(db.Model):
 class UserProfile(db.Model):
     User = db.UserProperty()
     FirstSession = db.DateTimeProperty(auto_now_add=True)
+
+class answerListing(db.Model):
+    date = db.DateTimeProperty(auto_now_add=True)
+    status = db.ReferenceProperty()
+    user = db.UserProperty()
+    private = db.BooleanProperty(default=False)
+    answer = db.StringProperty()
