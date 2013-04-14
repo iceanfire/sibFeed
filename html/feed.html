@@ -30,7 +30,7 @@
 				<em>{{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
 			</span> 
 			<span class="helpActions" id="{{update.key()}}">
-				<a href="#" class="help">Help</a>
+				<a href="#" class="help">{{update.helpCount}}</a>
 			</span>
 			
 		</div>
@@ -50,20 +50,7 @@
 		</div>
 
 	{% endfor %}
-	<!-- Prototype feed-item
-	<div class="feedItem">
-		<span class="profilePic">
-			<img src="">
-		</span>
-		<span class="updateInfo">
-			<em>Hadi Laasi</em> is working on his resume
-		</span> 
-		<span class="helpActions">
-			<a href="#">Help</a>
-			<a href="#">Comment</a>
-		</span>
-	</div>
-	-->
+
 </section>
 
 <script type="text/javascript">

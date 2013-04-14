@@ -9,6 +9,7 @@ class statusUpdates(db.Model):
     user = db.UserProperty()
     prefix = db.StringProperty()
     update = db.StringProperty()
+    helpCount = db.IntegerProperty(default=0)
     orgName = db.ReferenceProperty()
 
 

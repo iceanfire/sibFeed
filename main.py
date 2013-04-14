@@ -69,6 +69,7 @@ class Feed(authHandler):
             addNewUser.put()
 
         statusUpdateListing = statusUpdates.all().order('-date').fetch(limit=100)
+
         template_values = {'statusUpdates': statusUpdateListing, 'logoutUrl': users.create_logout_url("/")}
         self.render_response('html/feed.html', **template_values)
 
@@ -103,7 +104,11 @@ class Help(authHandler):
         newHelp.status = statusUpdates.get_by_id(questionId)
         newHelpId = newHelp.put()
 
+
         parentQuestion = statusUpdates.get_by_id(questionId)
+        parentQuestion.helpCount = parentQuestion.helpCount + 1
+        parentQuestion.put()
+
         answersList = answerListing().all().filter('status =',parentQuestion).order('date').fetch(limit=100)
 
         # List of all the users who are involved in the thread
