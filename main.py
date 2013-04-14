@@ -129,11 +129,16 @@ class Help(authHandler):
             userListing.remove(users.get_current_user())
         except:
             pass
+        
         # Send out the emails
-
+        # Catch over quota limits stuff
+        import logging
         for user in userListing:
-            email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a post ('"+parentQuestion.update+"') you are following at LearnToDo! \r\n\r\nCheck it out: \r\nhttp://learntodo.co/feed#"+str(questionKey))
-
+            try:
+              email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a post ('"+parentQuestion.update+"') you are following at LearnToDo! \r\n\r\nCheck it out: \r\nhttp://learntodo.co/feed#"+str(questionKey))
+            except Exception, e:
+              logging.exception(e)
+              
         self.redirect('/feed#'+str(questionKey))
 
 class Admin(authHandler):
