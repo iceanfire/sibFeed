@@ -79,8 +79,9 @@ $(document).ready(function() {
 
 
 
-$('.help').click(function(){ 
-	statusKey = $(this).parent().attr('id');
+$('.feedItem').click(function(){ 
+	//statusKey = $(this).parent().attr('id');
+	statusKey = $(this).find('.helpActions').attr('id');
 	className="."+statusKey; 
 	
 	if($(className).css('display')=="none"){
