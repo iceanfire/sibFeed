@@ -110,19 +110,19 @@ body{
 
 /* Different tab colors */
 .statusFeed .feedItem.Workingon{
-  border-left: 5px solid blue !important;
+  border-left: 5px solid blue;
 }
 
 .statusFeed .feedItem.Interestedin{
-  border-left: 5px solid green !important;
+  border-left: 5px solid green;
 }
 
 .statusFeed .feedItem.Needhelpwith{
-  border-left: 5px solid red !important;
+  border-left: 5px solid red;
 }
 
 .statusFeed .feedItem.Lookingforajob{
-  border-left: 5px solid orange !important;
+  border-left: 5px solid orange;
 }
 
 .statusFeed .feedItem .helpActions{

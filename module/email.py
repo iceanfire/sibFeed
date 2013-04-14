@@ -11,6 +11,6 @@ def sendNotification(email,subject,message):
             return False
 
         else:
-            sendAddress = "Hadi Laasi <iceanfire@gmail.com>"
+            sendAddress = "Learn To Do <admin@learntodo.co>"
             body = message
             return mail.send_mail(sendAddress, emailAddress, subject, body)
