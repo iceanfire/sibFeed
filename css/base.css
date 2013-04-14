@@ -155,21 +155,26 @@ body{
 }
 
 .help2{
+  background-color: #FBFBFB;
+  margin-left: 25px;
+  width: 95%;
   display:none;
+  border-radius: 5px;
+  padding-top: 8px;
 }
 
 .helpInput{
   
   padding: 10px;
-  margin: 0 0 10px 18px;
-  padding: 10px 0 20px 15px;
+  margin: 0 0 10px 16px;
+  padding: 6px 0 14px 0px
 }
 
 .helpInput form input[type="text"]{
-  width: 765px;
-  height: 30px;
-  padding-left: 10px;
-  font-size: 18px;
+  width: 840px;
+  height: 25px;
+  padding-left: 5px;
+  font-size: 14px;
 }
 
 .helpInput form input[type="submit"]{
@@ -193,19 +198,19 @@ body{
   border-radius: 5px;
   font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
   font-size: 14px;
-  padding: 8px 0px 8px 10px; 
-  margin-left: 25px;
-  width: 780px;
+  padding: 1px 0px 0px 14px;
+  width: 100%;
+  margin-bottom: 2px;
 
-  
 }
 .answerWrapper .user{
   font-weight:bold;
+  color: #333;
 }
 
 .answerWrapper .answer{
   padding-left: 5px;
   font-size: 14px;
-  line-height: 18px;
+  line-height: 17px;
   color: #333;
 }
