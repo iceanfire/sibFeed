@@ -1,5 +1,6 @@
 {% extends "html/include/base.html" %}
-conflict times 2
+<<<<<<< HEAD
+consider this conflict resolvedf:xe
 {% block pageTitle %}
 	Dream Share Feed
 {% endblock pageTitle %}
@@ -26,8 +27,16 @@ conflict times 2
 				<img src="">
 			</span>
 			<span class="updateInfo">
+<<<<<<< HEAD
 				<em>I have mergedd {{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
 				<em>{{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
+=======
+
+				<em>I have mergedd {{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
+
+				<em>{{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
+
+>>>>>>> a9ed796468d63ff0ec916c8765a31fe9dee4b94e
 			</span> 
 			<span class="helpActions" id="{{update.key()}}">
 				<a href="#" class="help">Help</a>
