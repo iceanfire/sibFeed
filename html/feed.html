@@ -67,14 +67,21 @@
 
 <script type="text/javascript">
 //$('.help').click(function(){ (className="."+$(this).parent().attr('id')); $(className).toggle() })
+$(document).ready(function() {
+	if(window.location.hash) {
+		var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+		//alert (hash);
+		$(('#'+hash+' a')).trigger('click');
+	} else {
+		// No hash - don't do anything
+	}
+});
+
+
 
 $('.help').click(function(){ 
 	statusKey = $(this).parent().attr('id');
 	className="."+statusKey; 
-
-	
-
-
 	
 	if($(className).css('display')=="none"){
 		$(className).show();
