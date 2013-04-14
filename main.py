@@ -140,9 +140,16 @@ class Admin(authHandler):
         pass
 
 class Resolve(authHandler):
-    def post(self,statusKey):
+    def post(self,statusKey, resolvedBy):
         statusKey = statusKey #this is the statusKey
-        self.redirect('feed#') #re-direct to question
+        
+        resolvedQuestion = statusUpdates.get(db.Key(statusKey))
+        resolvedQuestion.isResolved = True
+        resolvedQuestion.resolvedBy = resolvedBy
+        resolvedQuestion.put()
+        
+        self.redirect('/feed#'++str(statusKey)) #re-direct to question
+        
 
 application = webapp2.WSGIApplication([('/push', push),
                                       ('/', HomePage),

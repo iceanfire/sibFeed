@@ -22,12 +22,17 @@
 <section class="statusFeed">
 	{% for update in statusUpdates %}
 		
-		<div class="feedItem {{ update.prefix|replace(' ', '')|replace('@','')}}">
+		<div class="feedItem {{ update.prefix|replace(' ', '')|replace('@','')}} {% if update.isResolved %} resolved {% endif %}">
 			<span class="profilePic">
 				<img src="">
 			</span>
 			<span class="updateInfo">
-				<em>{{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
+				<em>{{update.user.nickname()}} - </em>
+				{% if update.isResolved %}
+				Thanks for the help {{update.resolvedBy.nickname()}}!
+				{% else %}
+				{{update.prefix}} {{update.update}}
+				{% endif %}
 			</span> 
 			<span class="helpActions" id="{{update.key()}}">
 				<a href="#" class="help">{{update.helpCount}}</a>
