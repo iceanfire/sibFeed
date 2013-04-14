@@ -72,8 +72,9 @@ class Feed(authHandler):
         
         # REMOVE ONCE DONE
         count = 0
+        from random import randint
         for update in statusUpdateListing:
-          count += 1
+          count += randint(2,9)
           if (count % 2 == 0):
             update.isResolved = True
             update.resolvedBy = users.get_current_user()
