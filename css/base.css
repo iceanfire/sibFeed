@@ -109,6 +109,20 @@ body{
 
 }
 
+.statusFeed .feedItem .resolveAction{
+  background-color: black;
+  float: right;
+  position: relative;
+  top: -36px;
+  padding: 18px;
+  color: white;
+  left: 49px;
+  z-index: -1;
+  left: 101px;
+  opacity: .1;
+}
+
+
 .statusFeed .feedItem.resolved{
   background-color: #DCE9CC;
   opacity: .5;
@@ -161,6 +175,7 @@ body{
   display:none;
   border-radius: 5px;
   padding-top: 8px;
+  margin-top: -10px;
 }
 
 .helpInput{
