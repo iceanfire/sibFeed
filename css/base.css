@@ -4,6 +4,14 @@ body{
   font-family: helvetica, verdana, sans-serif;
 }
 
+#logout{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
 .content{
   /* background-image: url("../images/content.png"); */
   margin: 20px auto 10px auto;
@@ -53,11 +61,12 @@ body{
   font-size: 18px;
   padding: 10px;
   border: 1px solid black;
+  height: 37px;
 }
 
 .updateStatus form input[type="text"]{
   font-size: 18px;
-  width: 540px;
+  width: 530px;
   height: 30px;
   padding-left: 5px;
 }
@@ -65,8 +74,14 @@ body{
 .updateStatus form input[type="submit"]{
   font-size: 16px;
   font-weight: bold;
-  padding: 5px;
+  padding: 8px;
   border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.updateStatus form input[type="submit"]:hover{
+  background-color: #009900;
 }
 
 .statusFeed{
@@ -86,8 +101,9 @@ body{
 .statusFeed .feedItem{
   background-color: #F8F8F8;
   padding: 20px 0 20px 20px;
-  margin: 0 0 0 0;
+  margin: 0 0 10px 0;
   border: 1px solid #CFCFCF;
+  border-left: 5px solid #CFCFCF;
 
 }
 
@@ -99,10 +115,10 @@ body{
 
 .statusFeed .feedItem .helpActions a{
   text-decoration: none;
-  color: black;
-  background-color: #457C47;
+  color: #457C47;
   padding: 18px;
   opacity: .7;
+  font-weight: bold;
 }
 
 .statusFeed .feedItem .helpActions a:hover{
@@ -119,12 +135,45 @@ body{
 }
 
 .helpInput{
-  background-color: red;
+  
   padding: 10px;
   margin: 0 0 10px 0;
+  padding: 10px 0 20px 15px;
 }
 
-.helpInputHidden{
-  display: none;
+.helpInput form input[type="text"]{
+  width: 775px;
+  height: 30px;
+  padding-left: 10px;
+  font-size: 18px;
 }
 
+.helpInput form input[type="submit"]{
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.helpInput form input[type="submit"]:hover{
+  background-color: #009900;
+}
+
+
+.answerWrapper{
+  font-family: verdana, sans-serif;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-top: 2px;
+}
+.answerWrapper .user{
+  font-weight:bold;
+}
+
+.answerWrapper .answer{
+  padding-left: 5px;
+  font-size: 14px;
+}

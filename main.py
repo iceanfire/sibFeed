@@ -11,6 +11,7 @@ from google.appengine.api import users #replace with linkedin?
 import jinja2
 import datetime
 from module import time #for time-zone support
+from module import email
 
 config = {}
 config['webapp2_extras.jinja2'] = {
@@ -51,8 +52,7 @@ class push(webapp2.RequestHandler):
 
 class HomePage(authHandler):
     def get(self):
-        template_values = {}
-        self.render_response('html/base.html', **template_values)
+        self.redirect('/feed')
 
 
 #@user_required
@@ -69,7 +69,7 @@ class Feed(authHandler):
             addNewUser.put()
 
         statusUpdateListing = statusUpdates.all().order('-date').fetch(limit=100)
-        template_values = {'statusUpdates': statusUpdateListing}
+        template_values = {'statusUpdates': statusUpdateListing, 'logoutUrl': users.create_logout_url("/")}
         self.render_response('html/feed.html', **template_values)
 
     def post(self):
@@ -85,24 +85,47 @@ class Feed(authHandler):
 
 
 class Help(authHandler):
-    def get(self,statusId):
+    def get(self,statusKey):
 
-        searchHelp = answerListing().all().filter('status =',db.Key(statusId)).fetch(limit=100)
-        print searchHelp
-        for search in searchHelp:
-            print search
-            #print "<div class='answerWrapper'><span class='user'>"+searchHelp.user.nickname()+"</span><span class='answer'>"+searchHelp.answer+"</span></div>"
+        answersList = answerListing().all().filter('status =',db.Key(statusKey)).order('date').fetch(limit=100)
+
+        for row in answersList:
+            self.response.out.write("<div class='answerWrapper'><span class='user'>"+row.user.nickname()+"</span><span class='answer'>"+row.answer+"</span></div>")
         
 
     def post(self):
-        helpAnswer = self.request.get('help')
-        helpId = int(self.request.get('statusId'))
+        questionId = int(self.request.get('statusId'))
         newHelp = answerListing()
         newHelp.user = users.get_current_user()
-        newHelp.answer = helpAnswer
-        
-        newHelp.status = statusUpdates.get_by_id(helpId)
-        newHelp.put()
+        newHelp.answer = self.request.get('help')
+
+        newHelp.status = statusUpdates.get_by_id(questionId)
+        newHelpId = newHelp.put()
+
+        parentQuestion = statusUpdates.get_by_id(questionId)
+        answersList = answerListing().all().filter('status =',parentQuestion).order('date').fetch(limit=100)
+
+        # List of all the users who are involved in the thread
+        userListing = []
+        # Add the people who have answered
+        for answer in answersList:
+            userListing.append(answer.user)
+
+        # Add the original asker of the question
+        userListing.append(parentQuestion.user)
+
+        # Remove duplicates
+        userListing = list(set(userListing))
+
+        # Remove the person doing the posting so that he/she doesn't get notified
+        try:
+            userListing.remove(users.get_current_user())
+        except:
+            pass
+        # Send out the emails
+
+            for user in userListing:
+                email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a thread you've signed up for. <a href='https://sibalumniportal.appspot.com/feed#"+str(questionId)+"'> Click here to learn more!</a>")
 
         self.redirect('/feed')
 
