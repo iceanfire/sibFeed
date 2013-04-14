@@ -1,5 +1,5 @@
 {% extends "html/include/base.html" %}
-
+conflict times 2
 {% block pageTitle %}
 	Dream Share Feed
 {% endblock pageTitle %}
@@ -26,11 +26,8 @@
 				<img src="">
 			</span>
 			<span class="updateInfo">
-<<<<<<< HEAD
 				<em>I have mergedd {{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
-=======
 				<em>{{update.user.nickname()}} - </em> {{update.prefix}} {{update.update}}
->>>>>>> dfcdf0d084185b239b1d869ccb2d070904c259f6
 			</span> 
 			<span class="helpActions" id="{{update.key()}}">
 				<a href="#" class="help">Help</a>
