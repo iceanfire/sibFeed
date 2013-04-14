@@ -39,8 +39,15 @@
 			</span>
 			
 		</div>
-
+		
 		<div class="help2 {{update.key()}}">
+			<!-- If question is resolved, we need to show the original question -->
+			{% if update.isResolved %}
+				<div class="orignalQuestionWrapper">
+					Original Question: {{update.prefix}} {{update.update}}
+				</div>
+			{% endif %}
+			
 			<div class="helpInput">
 				<form method="POST" action="/help">
 					<input type="hidden" value="{{update.key().id()}}" name="statusId" id='statusId' />
@@ -50,7 +57,6 @@
 				</form>
 			</div>
 			<div class="helpOutput">
-				
 			</div>
 		</div>
 
