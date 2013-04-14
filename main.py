@@ -139,12 +139,18 @@ class Admin(authHandler):
     def get(self):
         pass
 
+class Resolve(authHandler):
+    def post(self,statusKey):
+        statusKey = statusKey #this is the statusKey
+        self.redirect('feed#') #re-direct to question
+
 application = webapp2.WSGIApplication([('/push', push),
                                       ('/', HomePage),
                                       ('/feed', Feed),
                                       ('/admin', Admin),
                                       ('/help',Help),
-                                      ('/help/(.*)',Help)],
+                                      ('/help/(.*)',Help,
+                                       ('/resolve/(.*)',Resolve))],
                                      debug=True)
 
 def main():

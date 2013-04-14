@@ -78,6 +78,7 @@ body{
   border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
+
 }
 
 .updateStatus form input[type="submit"]:hover{
@@ -106,6 +107,11 @@ body{
   border-left: 5px solid #CFCFCF;
   cursor: pointer;
 
+}
+
+.statusFeed .feedItem.resolved{
+  background-color: #DCE9CC;
+  opacity: .5;
 }
 
 /* Different tab colors */
@@ -155,12 +161,12 @@ body{
 .helpInput{
   
   padding: 10px;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px 18px;
   padding: 10px 0 20px 15px;
 }
 
 .helpInput form input[type="text"]{
-  width: 775px;
+  width: 765px;
   height: 30px;
   padding-left: 10px;
   font-size: 18px;
@@ -173,6 +179,7 @@ body{
   border: 1px solid black;
   border-radius: 5px;
   cursor: pointer;
+  display:none;
 
 }
 
@@ -182,10 +189,15 @@ body{
 
 
 .answerWrapper{
-  font-family: verdana, sans-serif;
+  
+  border-radius: 5px;
+  font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
   font-size: 14px;
-  padding-left: 10px;
-  padding-top: 2px;
+  padding: 8px 0px 8px 10px; 
+  margin-left: 25px;
+  width: 780px;
+
+  
 }
 .answerWrapper .user{
   font-weight:bold;
@@ -194,4 +206,6 @@ body{
 .answerWrapper .answer{
   padding-left: 5px;
   font-size: 14px;
+  line-height: 18px;
+  color: #333;
 }

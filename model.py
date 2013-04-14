@@ -11,6 +11,8 @@ class statusUpdates(db.Model):
     update = db.StringProperty()
     helpCount = db.IntegerProperty(default=0)
     orgName = db.ReferenceProperty()
+    isResolved = db.BooleanProperty(default=False)
+    resolvedBy = db.UserProperty()
 
 
 class UserProfile(db.Model):
