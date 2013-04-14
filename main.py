@@ -132,7 +132,7 @@ class Help(authHandler):
         # Send out the emails
 
         for user in userListing:
-            email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to the post you were following at LearnToDo! \r\n\r\nCheck it out: \r\nhttp://learntodo.co/feed#"+str(questionKey))
+            email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a post ('"+parentQuestion.update+"') you are following at LearnToDo! \r\n\r\nCheck it out: \r\nhttp://learntodo.co/feed#"+str(questionKey))
 
         self.redirect('/feed#'+str(questionKey))
 
