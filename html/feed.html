@@ -21,7 +21,7 @@
 
 <section class="statusFeed">
 	{% for update in statusUpdates%}
-		<div class="feedItem">
+		<div class="feedItem redTab">
 			<span class="profilePic">
 				<img src="">
 			</span>
@@ -85,7 +85,7 @@ $('.feedItem').click(function(){
 	className="."+statusKey; 
 	
 	if($(className).css('display')=="none"){
-		$(className).show();
+		$(className).fadeIn();
 		getAnswers(statusKey);
 	}
 	else{

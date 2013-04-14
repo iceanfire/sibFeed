@@ -108,6 +108,11 @@ body{
 
 }
 
+/* Different tab colors */
+.redTab{
+  border-left: 8px solid #FF0000;
+}
+
 .statusFeed .feedItem .helpActions{
   float: right;
   position: relative;
