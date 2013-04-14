@@ -126,7 +126,7 @@ class Help(authHandler):
         # Send out the emails
 
         for user in userListing:
-            email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a thread you've signed up for. <a href='https://sibalumniportal.appspot.com/feed#"+str(questionKey)+"'> Click here to learn more!</a>")
+            email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a thread you've signed up for. Click here to learn more: https://sibalumniportal.appspot.com/feed#"+str(questionKey)+"'> ")
 
         self.redirect('/feed#'+str(questionKey))
 

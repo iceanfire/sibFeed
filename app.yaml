@@ -29,9 +29,7 @@ handlers:
 
 - url: /feed
   script: main.py
-  secure: always
   login: required
 
 - url: /.*
   script: main.py
-  secure: always
