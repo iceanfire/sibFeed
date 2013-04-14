@@ -95,6 +95,7 @@ class Help(authHandler):
 
     def post(self):
         questionId = int(self.request.get('statusId'))
+        questionKey = db.Key.from_path('statusUpdates', questionId)
         newHelp = answerListing()
         newHelp.user = users.get_current_user()
         newHelp.answer = self.request.get('help')
@@ -125,9 +126,9 @@ class Help(authHandler):
         # Send out the emails
 
             for user in userListing:
-                email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a thread you've signed up for. <a href='https://sibalumniportal.appspot.com/feed#"+str(questionId)+"'> Click here to learn more!</a>")
+                email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a thread you've signed up for. <a href='https://sibalumniportal.appspot.com/feed#"+str(questionKey)+"'> Click here to learn more!</a>")
 
-        self.redirect('/feed')
+        self.redirect('/feed#'+str(questionKey))
 
 class Admin(authHandler):
     def get(self):
