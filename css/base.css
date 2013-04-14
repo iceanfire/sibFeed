@@ -110,22 +110,31 @@ body{
 }
 
 .statusFeed .feedItem .resolveAction{
-  background-color: black;
-  float: right;
-  position: relative;
-  top: -36px;
-  padding: 18px;
-  color: white;
-  left: 49px;
-  z-index: -1;
-  left: 101px;
-  opacity: .1;
+  background-color: #4A543F;
+float: right;
+position: relative;
+top: -34px;
+padding: 15px 15px 15px 7px;
+color: white;
+
+z-index: -1;
+left: 54px;
+
+opacity: 1;
+border-radius: 0 5px 5px 0;
+}
+
+.statusFeed .feedItem .resolveAction.open{
+  z-index: 1;
+  left: 85px;
+
 }
 
 
 .statusFeed .feedItem.resolved{
   background-color: #DCE9CC;
   opacity: .5;
+  display: none;
 }
 
 /* Different tab colors */

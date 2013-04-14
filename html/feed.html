@@ -37,9 +37,17 @@
 			<span class="helpActions" id="{{update.key()}}">
 				<a href="#" class="help">{{update.helpCount}}</a>
 			</span>
-			<span class="resolveAction" id="">
-				✔
-			</span>
+			{% if currentUser==update.user and not update.isResolved %}
+				{% if update.helpCount > 0%}
+					<span class="resolveAction" data-key="{{update.key()}}">
+						✔ 
+					</span>
+				{%else%}
+					<span class="resolveAction" data-key="{{update.key()}}">
+						☓
+					</span>
+				{% endif %}
+			{%endif%}
 			
 		</div>
 		
@@ -92,10 +100,13 @@ $('.feedItem').click(function(){
 	if($(className).css('display')=="none"){
 		$(className).fadeIn();
 		getAnswers(statusKey);
+
+		$(this).find('.resolveAction').addClass('open')
 	}
 	else{
 		$(className).hide();
 		$(className).find('.answerWrapper').remove()
+		$(this).find('.resolveAction').removeClass('open')
 	}
 	$(className).find('#help').focus()
 	return false;
@@ -125,6 +136,17 @@ function getAnswers(statusKey){
 	})
 
 }
+
+$('.resolveAction').click(function(){
+	statusKey = $(this).attr('data-key');
+	url = "resolve/"+statusKey
+	$.get(url,function(data){
+		if(data=="True"){
+			window.location.href="/"
+		}
+	})
+
+})
 
 $('#statusBar').focus()
 

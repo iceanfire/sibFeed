@@ -70,21 +70,8 @@ class Feed(authHandler):
 
         statusUpdateListing = statusUpdates.all().order('-date').fetch(limit=100)
         
-        # REMOVE ONCE DONE
-        count = 0
-        for update in statusUpdateListing:
-          count += 1
-          if (count % 2 == 0):
-            update.isResolved = True
-            update.resolvedBy = users.get_current_user()
-            update.put()
-          else:
-            update.isResolved = False
-            update.resolvedBy = users.get_current_user()
-            update.put()
-          
         
-        template_values = {'statusUpdates': statusUpdateListing, 'logoutUrl': users.create_logout_url("/")}
+        template_values = {'statusUpdates': statusUpdateListing, 'logoutUrl': users.create_logout_url("/"),'currentUser':users.get_current_user()}
         self.render_response('html/feed.html', **template_values)
 
     def post(self):
@@ -154,15 +141,15 @@ class Admin(authHandler):
         pass
 
 class Resolve(authHandler):
-    def post(self,statusKey, resolvedBy):
+    def get(self,statusKey):
         statusKey = statusKey #this is the statusKey
         
         resolvedQuestion = statusUpdates.get(db.Key(statusKey))
         resolvedQuestion.isResolved = True
-        resolvedQuestion.resolvedBy = resolvedBy
+        resolvedQuestion.resolvedBy = users.get_current_user()
         resolvedQuestion.put()
-        
-        self.redirect('/feed#'++str(statusKey)) #re-direct to question
+        self.response.out.write("True")
+        #self.redirect('/feed#'+str(statusKey)) #re-direct to question
         
 
 application = webapp2.WSGIApplication([('/push', push),
@@ -170,8 +157,8 @@ application = webapp2.WSGIApplication([('/push', push),
                                       ('/feed', Feed),
                                       ('/admin', Admin),
                                       ('/help',Help),
-                                      ('/help/(.*)',Help,
-                                       ('/resolve/(.*)',Resolve))],
+                                      ('/help/(.*)',Help),
+                                       ('/resolve/(.*)',Resolve)],
                                      debug=True)
 
 def main():
