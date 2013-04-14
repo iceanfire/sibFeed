@@ -20,8 +20,9 @@
 </section>
 
 <section class="statusFeed">
-	{% for update in statusUpdates%}
-		<div class="feedItem redTab">
+	{% for update in statusUpdates %}
+		
+		<div class="feedItem {{ update.prefix|replace(' ', '')|replace('@','')}}">
 			<span class="profilePic">
 				<img src="">
 			</span>

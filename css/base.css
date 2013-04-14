@@ -109,8 +109,20 @@ body{
 }
 
 /* Different tab colors */
-.redTab{
-  border-left: 8px solid #FF0000;
+.statusFeed .feedItem.Workingon{
+  border-left: 5px solid blue !important;
+}
+
+.statusFeed .feedItem.Interestedin{
+  border-left: 5px solid green !important;
+}
+
+.statusFeed .feedItem.Needhelpwith{
+  border-left: 5px solid red !important;
+}
+
+.statusFeed .feedItem.Lookingforajob{
+  border-left: 5px solid orange !important;
 }
 
 .statusFeed .feedItem .helpActions{
