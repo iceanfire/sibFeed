@@ -7,11 +7,12 @@ from model import *
 
 
 import webapp2
-from google.appengine.api import users #replace with linkedin?
+from google.appengine.api import users # Replace with linkedin?
 import jinja2
 import datetime
-from module import time #for time-zone support
+from module import time # For time-zone support
 from module import email
+import re  # Used for hyperlinking text
 
 config = {}
 config['webapp2_extras.jinja2'] = {
@@ -87,12 +88,17 @@ class Feed(authHandler):
 
 
 class Help(authHandler):
+    # Uses regex to find URLs within text and output the necessary code for it to be hyperlinked
+    def hyperLinkText(self, text):
+      r = re.compile(r"(http://[^ ]+)")
+      return r.sub(r'<a href="\1" target="_blank">\1</a>', text) 
+    
     def get(self,statusKey):
 
         answersList = answerListing().all().filter('status =',db.Key(statusKey)).order('date').fetch(limit=100)
 
         for row in answersList:
-            self.response.out.write("<div class='answerWrapper'><span class='user'>"+row.user.nickname()+"</span><span class='answer'>"+row.answer+"</span></div>")
+            self.response.out.write("<div class='answerWrapper'><span class='user'>"+row.user.nickname()+"</span><span class='answer'>"+Help.hyperLinkText(self, row.answer)+"</span></div>")
         
 
     def post(self):
