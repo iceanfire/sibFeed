@@ -27,11 +27,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-40110382-1', 'learntodo.co');
-      ga('send', 'pageview');
+      ga('send', 'pageview', {
+        'dimension1':'{{currentUser}}'
+      });
+      
     </script>
     <script>
       $('.feedItem').on('click', function() {
-        ga('send', 'event', 'feedItem', 'click', 'feedListInteraction');
+        ga('send', 'event', 'page', 'load', 'feedListInteraction');
       });
     </script>
 
