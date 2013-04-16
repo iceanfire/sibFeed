@@ -90,7 +90,7 @@ class Feed(authHandler):
 class Help(authHandler):
     # Uses regex to find URLs within text and output the necessary code for it to be hyperlinked
     def hyperLinkText(self, text):
-      r = re.compile(r"(http://[^ ]+)")
+      r = re.compile(r"(http://[^ \)\(]+)")
       return r.sub(r'<a href="\1" target="_blank">\1</a>', text) 
     
     def get(self,statusKey):
