@@ -13,6 +13,8 @@ import datetime
 from module import time # For time-zone support
 from module import email
 import re  # Used for hyperlinking text
+import config as config2#used to store config settings
+
 
 config = {}
 config['webapp2_extras.jinja2'] = {
@@ -38,9 +40,18 @@ def user_required(handler):
 
 
 class authHandler(webapp2.RequestHandler):
-    def render_response(self, template_path, **template_values):
-        template = jinja_environment.get_template(template_path)
-        self.response.write(template.render(**template_values))
+	def dispatch(self,*args,**kwargs):
+		self.domain = self.request.headers['Host']
+		self.subDomain = self.domain.split('.')[0]
+		self.user = users.get_current_user()
+		if self.subDomain in config2.SUBDOMAINLIST:
+			return super(authHandler, self).dispatch(*args, **kwargs)		
+		else:
+			pass
+
+	def render_response(self, template_path, **template_values):
+		template = jinja_environment.get_template(template_path)
+		self.response.write(template.render(**template_values))
 
 
 class push(webapp2.RequestHandler):
@@ -51,40 +62,47 @@ class push(webapp2.RequestHandler):
         self.post()
 
 
-class HomePage(authHandler):
-    def get(self):
-        self.redirect('/feed')
+class HomePage(webapp2.RequestHandler):
+	def render_response(self, template_path, **template_values):
+		template = jinja_environment.get_template(template_path)
+		self.response.write(template.render(**template_values))
 
+	def get(self):
+		self.response.out.write("home")
+		self.response.out.write("<a href='http://bos.localhost:8080/feed'>Boston</a>")
+		self.response.out.write("<a href='http://nyc.localhost:8080/feed'>New York</a>")
+		template_values = {}
+		self.render_response('html/home.html', **template_values)
 
 #@user_required
 class Feed(authHandler):
     def get(self):
-        user = users.get_current_user()
-        userExists = UserProfile.all()
-        userExists.filter("User =", user).fetch(limit=1)
-        try:
-            userExists[0]
-        except:
-            addNewUser = UserProfile()
-            addNewUser.User = user
-            addNewUser.put()
+		user = users.get_current_user()
+		userExists = UserProfile.all()
+		userExists.filter("User =", user).fetch(limit=1)
+		try:
+			userExists[0]
+		except:
+			addNewUser = UserProfile()
+			addNewUser.User = user
+			addNewUser.put()
 
-        statusUpdateListing = statusUpdates.all().order('-date').fetch(limit=100)
-        
-        
-        template_values = {'statusUpdates': statusUpdateListing, 'logoutUrl': users.create_logout_url("/"),'currentUser':users.get_current_user()}
-        self.render_response('html/feed.html', **template_values)
+		statusUpdateListing = statusUpdates.all().filter("location =",self.subDomain).order('-date').fetch(limit=100)
+		
+		template_values = {'statusUpdates': statusUpdateListing, 'logoutUrl': users.create_logout_url("/"),'currentUser':users.get_current_user()}
+		self.render_response('html/feed.html', **template_values)
 
     def post(self):
-        newStatus = statusUpdates()
-        newStatus.prefix = self.request.get('statusPrefix')
-        newStatus.update = self.request.get('statusUpdate')
-        try:
-            newStatus.user = users.get_current_user()
-            newStatus.put()
-            self.redirect('/feed')
-        except:
-            self.redirect('/feed')
+		newStatus = statusUpdates()
+		newStatus.prefix = self.request.get('statusPrefix')
+		newStatus.update = self.request.get('statusUpdate')
+		newStatus.location = self.subDomain
+		try:
+			newStatus.user = users.get_current_user()
+			newStatus.put()
+			self.redirect('/feed')
+		except:
+			self.redirect('/feed')
 
 
 class Help(authHandler):
@@ -161,9 +179,18 @@ class Resolve(authHandler):
         resolvedQuestion.put()
         self.response.out.write("True")
         #self.redirect('/feed#'+str(statusKey)) #re-direct to question
-        
+
+class updateData(webapp2.RequestHandler):
+	def get(self):
+		statusUpdateListing = statusUpdates.all()
+
+		for statusUpdate in statusUpdateListing:
+			statusUpdate.location = "bos"
+			statusUpdate.put()
+
 
 application = webapp2.WSGIApplication([('/push', push),
+                                      ('/updateData',updateData),
                                       ('/', HomePage),
                                       ('/feed', Feed),
                                       ('/admin', Admin),

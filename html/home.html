@@ -1,0 +1,33 @@
+{% extends "html/include/base.html" %}
+
+{% block pageTitle %}
+	LearnToDo.co
+{% endblock pageTitle %}
+
+{% block head %}
+	<style type="text/css">
+		#cities{
+			text-align: center;
+			padding: 40px 0 0 0;
+		}
+
+		#cities a{
+			padding: 0 20px 0 0;
+		}
+
+	</style>
+{% endblock head%}
+
+{% block content %}
+
+	<p id="description">
+		LearnToDo is an alumni portal for students of Startup Institute. To use it, please click on which city SIB you are participating in &amp; login with Google! 
+	</p>
+
+	<div id="cities" >
+		<a href="http://bos.learntodo.co/feed"><img src="/images/boston.png"></a>
+		<a href="http://nyc.learntodo.co/feed"><img src="/images/newyork.png"></a>
+	</div>
+
+
+{% endblock content %}

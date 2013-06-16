@@ -4,15 +4,16 @@ class organization(db.Model):
     name = db.StringProperty()
 
 class statusUpdates(db.Model):
-    """List of status updates"""
-    date = db.DateTimeProperty(auto_now_add=True)
-    user = db.UserProperty()
-    prefix = db.StringProperty()
-    update = db.StringProperty()
-    helpCount = db.IntegerProperty(default=0)
-    orgName = db.ReferenceProperty()
-    isResolved = db.BooleanProperty(default=False)
-    resolvedBy = db.UserProperty()
+	"""List of status updates"""
+	date = db.DateTimeProperty(auto_now_add=True)
+	user = db.UserProperty()
+	prefix = db.StringProperty()
+	update = db.StringProperty()
+	helpCount = db.IntegerProperty(default=0)
+	orgName = db.ReferenceProperty()
+	isResolved = db.BooleanProperty(default=False)
+	resolvedBy = db.UserProperty()
+	location = db.StringProperty()
 
 
 class UserProfile(db.Model):

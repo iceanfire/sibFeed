@@ -20,3 +20,9 @@ indexes:
   - name: status
   - name: date
     direction: desc
+
+- kind: statusUpdates
+  properties:
+  - name: location
+  - name: date
+    direction: desc
