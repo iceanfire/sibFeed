@@ -68,9 +68,6 @@ class HomePage(webapp2.RequestHandler):
 		self.response.write(template.render(**template_values))
 
 	def get(self):
-		self.response.out.write("home")
-		self.response.out.write("<a href='http://bos.localhost:8080/feed'>Boston</a>")
-		self.response.out.write("<a href='http://nyc.localhost:8080/feed'>New York</a>")
 		template_values = {}
 		self.render_response('html/home.html', **template_values)
 
@@ -159,7 +156,7 @@ class Help(authHandler):
         import logging
         for user in userListing:
             try:
-              email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a post ('"+parentQuestion.update+"') you are following at LearnToDo! \r\n\r\nCheck it out: \r\nhttp://learntodo.co/feed#"+str(questionKey))
+              email.sendNotification(user.email(), 'LearnToDo Notification Update', ""+users.get_current_user().nickname()+" has posted a response to a post ('"+parentQuestion.update+"') you are following at LearnToDo! \r\n\r\nCheck it out: \r\nhttp://"+parentQuestion.location+".learntodo.co/feed#"+str(questionKey))
             except Exception, e:
               logging.exception(e)
               

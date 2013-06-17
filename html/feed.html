@@ -142,7 +142,7 @@ $('.resolveAction').click(function(){
 	url = "resolve/"+statusKey
 	$.get(url,function(data){
 		if(data=="True"){
-			window.location.href="/"
+			document.location.reload(true)
 		}
 	})
 
