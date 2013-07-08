@@ -1,7 +1,17 @@
 from google.appengine.ext import db
 
+
+class conversation(db.Model):
+	user = db.UserProperty()
+	cId = db.StringProperty()
+	date = db.DateTimeProperty(auto_now_add=True)
+	title = db.StringProperty()
+
 class organization(db.Model):
+    user = db.UserProperty()
     name = db.StringProperty()
+    phone = db.StringProperty()
+    dateCreated = db.DateTimeProperty(auto_now_add=True)
 
 class statusUpdates(db.Model):
 	"""List of status updates"""
